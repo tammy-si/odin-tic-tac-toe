@@ -15,7 +15,30 @@ const gameBoard = (() => {
         board[x][y] = symbol;
     }
 
-    return {board, checkLocation, placeSymbol}
+    // check if anyone has won reutrns True if someone has won
+    const checkWin = (symbol) => {
+        // check rows
+        for (let i = 0; i < 3; i++) {
+            if (board[i][0]==symbol && board[i][1]==symbol && board[i][2] == symbol) {
+                return true
+            }
+        }
+        // check columns
+        for (let i = 0; i < 3; i++) {
+            if (board[0][i]==symbol && board[1][i]==symbol && board[2][i] == symbol) {
+                return true
+            }
+        }
+        // check diagonals
+        if (board[0][0]==symbol && board[1][1]==symbol && board[2][2] == symbol) {
+            return true
+        } else if (board[0][2]==symbol && board[1][1]==symbol && board[2][0] == symbol) {
+            return true
+        }
+        return false
+    }
+
+    return {board, checkLocation, placeSymbol, checkWin}
 })();
 
 const Player = (sym) => {
@@ -41,6 +64,10 @@ const displayController = (() => {
             board.placeSymbol(x, y, curr.symbol);
             // also change the DOM to match
             block.textContent = curr.symbol;
+            // check if this move caused the player to win
+            if (board.checkWin(curr.symbol)) {
+                console.log(curr.symbol + "won")
+            }
             // this to alternate turn
             curr = curr == player1 ? player2 : player1;
         }
