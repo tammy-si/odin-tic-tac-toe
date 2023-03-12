@@ -53,3 +53,14 @@ hr.diagonalWin {
     left: -50px;
     top: 140px;
 }
+
+.winner {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    font-size: 40pt;
+    z-index: 1;
+}

@@ -1,3 +1,6 @@
+const allBlocks = document.querySelectorAll(".block")
+const winnerDiv = document.querySelector(".winner");
+
 // gameBoard module to make the gameboard
 const gameBoard = (() => {
     const board = [
@@ -25,6 +28,7 @@ const gameBoard = (() => {
                 line.style.display = "block";
                 // move the line to where it won
                 line.style.top = String(i * 100 + 40) + "px";
+                return true;
             }
         }
         // check columns
@@ -37,8 +41,6 @@ const gameBoard = (() => {
                 return true
             }
         }
-
-        console.log(board)
         // check diagonals
         if (board[0][0]==symbol && board[1][1]==symbol && board[2][2] == symbol) {
             let line = document.querySelector('.diagonalWin');
@@ -72,6 +74,22 @@ const displayController = (() => {
     const player2 = Player("O");
     let curr = player1;
 
+    // board is the board module board.board is the array
+    // clears the game and restarts sort of
+    const clear = (board) => {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                board.board[i][j] = "";
+            }
+        }
+        // clears all symbols visually
+        allBlocks.forEach(block => block.innerHTML = "")
+        // hides the winning line, makes all the lines none
+        document.querySelectorAll("hr").forEach(line => line.style.display = "none");
+        // now close the winner display
+        winnerDiv.style.display = "none";
+    }
+
     const clickedBlock = (block, board) => {
         // clicked Location is an array with the block location the user clicked
         let clickedLocation = block.id.split(" ")
@@ -86,20 +104,23 @@ const displayController = (() => {
             block.textContent = curr.symbol;
             // check if this move caused the player to win
             if (board.checkWin(curr.symbol)) {
-                console.log(curr.symbol + "won")
+                // declare a winner and only clear once
+                // display the winner then restart the game by just clearing everything
+                winnerDiv.innerHTML = curr.symbol + " won";
+                winnerDiv.style.display = "flex";
             }
             // this to alternate turn
             curr = curr == player1 ? player2 : player1;
         }
-        console.log(curr)
     }
-    console.log(player1);
-    console.log(player2);
-    return {clickedBlock}
+    return {clickedBlock, clear}
 })();
 
 // makes eventlisteners for block
-const allBlocks = document.querySelectorAll(".block")
 allBlocks.forEach((block) => block.addEventListener('click', () => {
     displayController.clickedBlock(block, gameBoard);
 }))
+
+winnerDiv.addEventListener("click", () => {
+    displayController.clear(gameBoard);
+})
