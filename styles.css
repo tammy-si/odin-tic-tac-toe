@@ -21,6 +21,10 @@ body{
 
 .block {
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60pt
 }
 
 /* for row win it's 40 px top for top row, 140px 2nd, 240 3rd */
