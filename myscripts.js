@@ -5,6 +5,7 @@ const gameBoard = (() => {
         ["", "", ""],
         ["", "", ""]
     ]
+    
 
     const checkLocation = (x, y) => {
         // if the location the user clicked on is empty, returns true
