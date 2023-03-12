@@ -5,7 +5,6 @@ const gameBoard = (() => {
         ["", "", ""],
         ["", "", ""]
     ]
-    
 
     const checkLocation = (x, y) => {
         // if the location the user clicked on is empty, returns true
@@ -21,19 +20,39 @@ const gameBoard = (() => {
         // check rows
         for (let i = 0; i < 3; i++) {
             if (board[i][0]==symbol && board[i][1]==symbol && board[i][2] == symbol) {
-                return true
+                // draw out the winning line
+                let line = document.querySelector('.rowWin');
+                line.style.display = "block";
+                // move the line to where it won
+                line.style.top = String(i * 100 + 40) + "px";
             }
         }
         // check columns
         for (let i = 0; i < 3; i++) {
             if (board[0][i]==symbol && board[1][i]==symbol && board[2][i] == symbol) {
+                let line = document.querySelector('.columnWin');
+                line.style.display = "block";
+                // move the line to where it won
+                line.style.left = String(i * 100 - 100) + "px";
                 return true
             }
         }
+
+        console.log(board)
         // check diagonals
         if (board[0][0]==symbol && board[1][1]==symbol && board[2][2] == symbol) {
+            let line = document.querySelector('.diagonalWin');
+            console.log('135');
+            line.style.display = "block";
+            // move the line to where it won
+            line.style.transform = 'rotate(45deg)' ;
             return true
         } else if (board[0][2]==symbol && board[1][1]==symbol && board[2][0] == symbol) {
+            console.log('135');
+            let line = document.querySelector('.diagonalWin');
+            line.style.display = "block";
+            // move the line to where it won
+            line.style.transform = 'rotate(135deg)' ;
             return true
         }
         return false

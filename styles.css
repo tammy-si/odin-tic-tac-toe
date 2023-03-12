@@ -1,8 +1,11 @@
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: lightblue;
+    margin: 0;
 }
 
 .grid {
@@ -22,6 +25,7 @@ body{
 
 /* for row win it's 40 px top for top row, 140px 2nd, 240 3rd */
 hr {
+    display: none;
     position: absolute;
     border: 2px solid black;
     width: 295px;
@@ -40,7 +44,7 @@ hr.columnWin {
 
 /* for other way diagonal win, just have to rotate 135deg instead of 45deg*/
 hr.diagonalWin {
-    transform: rotate(45deg);
+    transform: rotate(135deg);
     width: 400px;
     left: -50px;
     top: 140px;
