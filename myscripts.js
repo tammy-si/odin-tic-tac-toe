@@ -1,5 +1,6 @@
 const allBlocks = document.querySelectorAll(".block")
 const winnerDiv = document.querySelector(".winner");
+const restartButton = document.querySelector(".restart")
 
 // gameBoard module to make the gameboard
 const gameBoard = (() => {
@@ -122,5 +123,9 @@ allBlocks.forEach((block) => block.addEventListener('click', () => {
 }))
 
 winnerDiv.addEventListener("click", () => {
+    displayController.clear(gameBoard);
+})
+
+restartButton.addEventListener("click", () => {
     displayController.clear(gameBoard);
 })
