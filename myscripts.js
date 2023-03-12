@@ -1,6 +1,7 @@
 const allBlocks = document.querySelectorAll(".block")
 const winnerDiv = document.querySelector(".winner");
 const restartButton = document.querySelector(".restart")
+const nextP = document.querySelector('.next')
 
 // gameBoard module to make the gameboard
 const gameBoard = (() => {
@@ -45,13 +46,11 @@ const gameBoard = (() => {
         // check diagonals
         if (board[0][0]==symbol && board[1][1]==symbol && board[2][2] == symbol) {
             let line = document.querySelector('.diagonalWin');
-            console.log('135');
             line.style.display = "block";
             // move the line to where it won
             line.style.transform = 'rotate(45deg)' ;
             return true
         } else if (board[0][2]==symbol && board[1][1]==symbol && board[2][0] == symbol) {
-            console.log('135');
             let line = document.querySelector('.diagonalWin');
             line.style.display = "block";
             // move the line to where it won
@@ -94,7 +93,6 @@ const displayController = (() => {
     const clickedBlock = (block, board) => {
         // clicked Location is an array with the block location the user clicked
         let clickedLocation = block.id.split(" ")
-        console.log(clickedLocation)
         let x = Number(clickedLocation[0]);
         let y = Number(clickedLocation[1]);
         // make sure that the block the user clicked on is actually empty before we can put it in
@@ -112,6 +110,7 @@ const displayController = (() => {
             }
             // this to alternate turn
             curr = curr == player1 ? player2 : player1;
+            nextP.textContent = curr.symbol + " is next."
         }
     }
     return {clickedBlock, clear}
